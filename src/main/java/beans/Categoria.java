@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -40,18 +42,6 @@ public class Categoria implements Serializable{
 	private String descripcion;
 	private boolean activo=true;
 	private List<Producto> productos = new ArrayList<Producto>(0); 
-	
-	// auxiliar para enviar el idPadre al formulario, no se crea en la base de datos
-	@Transient
-	public Long aux=null ;
-	@Transient
-	public Long getAux(){
-		return aux;
-	}
-	@Transient
-	public void setAux(Long aux) {
-		this.aux = aux;
-	}
 	
 	@Transient
 	private File auxImagen=null;  
@@ -128,6 +118,14 @@ public class Categoria implements Serializable{
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}	
+	
+	//setea en null los padres de todos sus hijos antes de eliminarse
+	 @PreRemove
+	    private void removeHijo() {
+	        for (Categoria m : this.getHijos()) {
+	            m.setPadre(null);
+	        }
+	    }
 
 	public Categoria(String nom) {
 		this.nombre=nom;
@@ -136,7 +134,7 @@ public class Categoria implements Serializable{
 	public Categoria(){
 		
 	}
-	//----------------------------------------------
+	//---------------------------------------------
 	
 	public String toString(){
 		return this.getNombre();
@@ -152,4 +150,5 @@ public class Categoria implements Serializable{
 
         }  else { return false; }
     } // Cierre del método equals
+	 
 }

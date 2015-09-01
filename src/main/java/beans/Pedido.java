@@ -95,6 +95,7 @@ public class Pedido {
 		super();
 	}
 	@OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "idDireccion")
 	public Direccion getDireccion() {
 		return direccion;

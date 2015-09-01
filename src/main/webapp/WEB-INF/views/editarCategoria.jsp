@@ -51,4 +51,4 @@
 		</form:form>
 		<br>
 		
-<a href="./ver.htm">Ver Categorias</a> html>
+<a href="./ver.htm">Ver Categorias</a>
