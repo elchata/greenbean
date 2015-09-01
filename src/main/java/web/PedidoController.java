@@ -1,5 +1,8 @@
 package web; 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import service.ServiceManager;  
 import beans.Cancelado;
+import beans.Carrito;
 import beans.Cliente;
 import beans.Confirmado;
 import beans.Entregado;
@@ -20,6 +24,7 @@ import beans.Estado;
 import beans.Nuevo;
 import beans.Pedido;
 import beans.Preparado;
+import beans.Producto;
 
 @Controller
 @RequestMapping(value="/pedido")
@@ -77,10 +82,8 @@ public class PedidoController {
     	ped.setEstado(nuevo);
     	this.productManager.guardarPedido(ped);
     	Cliente aux = (Cliente) session.getAttribute("sesion");
-    	Long auxCar = aux.getCarrito().getIdContenedor();
-    	aux.setCarrito(null);
+    	aux.getCarrito().setProductos(new HashMap<Producto, Integer>());;
     	this.productManager.guardarCliente(aux);
-    	this.productManager.borrarCarrito(auxCar);
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";

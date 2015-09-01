@@ -6,7 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,6 +36,9 @@ public abstract class Estado implements Serializable {
 	private Long idEstado;
 	private Date fecha;
 	private Estado anterior;
+	@ElementCollection
+	@CollectionTable(name="siguientes", joinColumns=@JoinColumn(name="idEstado"))
+	@Column(name="siguiente")
 	private ArrayList<String> siguiente = new ArrayList<String>();
 	
 	@Id
@@ -64,6 +70,7 @@ public abstract class Estado implements Serializable {
 	public void setAnterior(Estado anterior) {
 		this.anterior = anterior;
 	}
+	
 	public ArrayList<String> getSiguiente() {
 		return siguiente;
 	}

@@ -32,8 +32,8 @@ public class Preparado extends Estado implements Serializable{
 	public Preparado(Confirmado confirmado) {
 		super(new Date());
 		this.setAnterior(confirmado);
-		this.getSiguiente().add(Enviado.class.getName());
-		this.getSiguiente().add(Cancelado.class.getName());
+		this.getSiguiente().add("Enviado");
+		this.getSiguiente().add("Cancelado");
 	}
 
 	

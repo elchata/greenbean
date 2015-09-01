@@ -22,8 +22,8 @@ public class Enviado extends Estado implements Serializable{
 	public Enviado(Preparado preparado) {
 		super(new Date());
 		this.setAnterior(preparado);
-		this.getSiguiente().add(Entregado.class.getName());
-		this.getSiguiente().add(Cancelado.class.getName());
+		this.getSiguiente().add("Entregado");
+		this.getSiguiente().add("Cancelado");
 	}
 
 	public Enviado() {

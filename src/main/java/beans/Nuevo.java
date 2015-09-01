@@ -23,8 +23,8 @@ public class Nuevo extends Estado implements Serializable{
 	public Nuevo() {
 		super(new Date());
 		this.setAnterior(null);
-		this.getSiguiente().add(Confirmado.class.getName());
-		this.getSiguiente().add(Cancelado.class.getName());
+		this.getSiguiente().add("Confirmado");
+		this.getSiguiente().add("Cancelado");
 	}
 	
 	

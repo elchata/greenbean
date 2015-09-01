@@ -183,14 +183,14 @@ public class ProductoController {
     	int cant = 1;
     	if (aux.getVisitas().containsKey(prod)) cant = aux.getVisitas().get(prod) + 1;
     	aux.getVisitas().put(prod, cant);
+    	aux.setCarrito(this.productManager.guardarCarrito(aux.getCarrito()));   
     	this.productManager.guardarCliente(aux);
     	// 
     	prod.getVisitas().put(aux, cant);
     	this.productManager.guardarProducto(prod);
     	
     	//++++++++++++++++++
-    	
-    	this.productManager.guardarCarrito(carro);    	
+    	 	
     	return "redirect:listar.htm";
    	}
     

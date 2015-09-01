@@ -35,8 +35,8 @@ public class Confirmado extends Estado implements Serializable {
 		super(new Date());
 		this.setAnterior(nuevo);
 		this.setObservacion(observacion);
-		this.getSiguiente().add(Preparado.class.getName());
-		this.getSiguiente().add(Cancelado.class.getName());
+		this.getSiguiente().add("Preparado");
+		this.getSiguiente().add("Cancelado");
 	}
 	
 
