@@ -12,6 +12,7 @@ public class Nuevo extends Estado implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private String detalle;
 	
 	public String getDetalle() {
@@ -23,8 +24,10 @@ public class Nuevo extends Estado implements Serializable{
 	public Nuevo() {
 		super(new Date());
 		this.setAnterior(null);
-		this.getSiguiente().add("Confirmado");
-		this.getSiguiente().add("Cancelado");
+	}
+	public String[] siguiente() {
+		String[] result = {"Confirmado", "Cancelado"};
+		return result;
 	}
 	
 	

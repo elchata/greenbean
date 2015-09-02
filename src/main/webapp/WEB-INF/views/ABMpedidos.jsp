@@ -16,12 +16,10 @@
 	    <td><c:out value="${ped.cliente.idUser}"/></td>
 	    <td>
 	    <form:select path="estado" onchange="editarEstado(this.value, ${ped.idPedido})">
-	    <form:option value="${ped.estado.idEstado }" selected="selected" label="${ped.estado['class'].toString()}"/>
-	    <c:forEach items="${ped.estado.siguiente}" var="est">
-		     <form:option value="${est}" label="${est}"/>		
-		</c:forEach> 
-		</td>
+	    <form:option value="${ped.estado.idEstado }" selected="selected" label="${ped.estado['class'].name}"/>
+	    <form:option value="${ped.estado.siguiente()[0]}" label="${ped.estado.siguiente()[0]}"/>		
 		</form:select>
+		</td>
 	    <c:url value="./editar.htm" var="catURL2">
 			<c:param name="idPed" value="${ped.idPedido}"/>
 		</c:url>

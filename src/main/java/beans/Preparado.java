@@ -19,7 +19,7 @@ public class Preparado extends Estado implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String[] paquetes;
-	
+
 	public String[] getPaquetes() {
 		return paquetes;
 	}
@@ -32,9 +32,11 @@ public class Preparado extends Estado implements Serializable{
 	public Preparado(Confirmado confirmado) {
 		super(new Date());
 		this.setAnterior(confirmado);
-		this.getSiguiente().add("Enviado");
-		this.getSiguiente().add("Cancelado");
 	}
-
+	
+	public String[] siguiente() {
+		String[] result = {"Enviado", "Cancelado"};
+		return result;
+	}
 	
 }
