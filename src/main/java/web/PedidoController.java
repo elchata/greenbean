@@ -22,8 +22,7 @@ import beans.Estado;
 import beans.Nuevo;
 import beans.Pedido;
 import beans.Preparado;
-import beans.Producto;
-import beans.Provincia;
+import beans.Producto; 
 
 @Controller
 @RequestMapping(value="/pedido")
