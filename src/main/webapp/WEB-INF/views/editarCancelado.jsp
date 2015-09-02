@@ -6,7 +6,7 @@
 		<form:form id="queryForm" action="${actionUrl }" commandName="command" method="post">		
 			<fieldset>
 				<legend></legend>
-					<label for="auxString">Observaciones:</label>
+					<label for="auxString">Motivo:</label>
 					<form:textarea path="auxString" rows="5" cols="30" />		
 					<form:input path="idPedido" type="hidden" /> 
 			</fieldset> 
