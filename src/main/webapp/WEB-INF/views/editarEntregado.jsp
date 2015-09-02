@@ -6,8 +6,6 @@
 		<form:form id="queryForm" action="${actionUrl }" commandName="command" method="post">		
 			<fieldset>
 				<legend></legend>
-					<label for="auxString">Observaciones:</label>
-					<form:textarea path="auxString" rows="5" cols="30" />		
 					<form:input path="idPedido" type="hidden" /> 
 			</fieldset> 
 		</form:form>  

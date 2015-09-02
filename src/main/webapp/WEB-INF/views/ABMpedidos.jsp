@@ -1,7 +1,13 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- 
+ 	<div id="queryDialog" style="display: none;">
+		<%@ include file="editarConfirmado.jsp"%>
+		<%@ include file="editarCancelado.jsp"%>
+		<%@ include file="editarEntregado.jsp"%>
+		<%@ include file="editarEnviado.jsp"%>
+		<%@ include file="editarPreparado.jsp"%>
+	</div>
 <h2>Pedido:</h2>
 <table border="1">
   <tr>
