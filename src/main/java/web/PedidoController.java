@@ -25,6 +25,7 @@ import beans.Nuevo;
 import beans.Pedido;
 import beans.Preparado;
 import beans.Producto;
+import beans.Provincia;
 
 @Controller
 @RequestMapping(value="/pedido")
@@ -40,6 +41,7 @@ public class PedidoController {
 	@RequestMapping(value="/ver.htm")
 	public String mostrarPedidos(ModelMap model) { 
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
+	    model.addAttribute("command", new Pedido());
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
 	}
@@ -120,7 +122,7 @@ public class PedidoController {
    	} 
     
     private String avanzar(Pedido ped, ModelMap model, Estado estado){
-    	ped.setEstado(estado);
+    	ped.setEstado(this.productManager.guardarEstado(estado));
     	this.productManager.guardarPedido(ped);
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","ABMpedidos.jsp");
