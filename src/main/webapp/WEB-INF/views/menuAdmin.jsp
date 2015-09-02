@@ -17,4 +17,6 @@
 	<li><a href="<c:url value="/producto/buscar.htm"/>">Buscar producto x nombre</a></li>
 	<li><a href="<c:url value="/producto/listar.htm"/>">Listar Productos</a></li>
 	<li><a href="<c:url value="/ciudad/ver.htm"/>">ABM ciudad</a></li>
+	<li><a href="<c:url value="rellenar.htm"/>">Completar BBDD</a></li>
+	
 </ul>

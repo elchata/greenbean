@@ -1,6 +1,8 @@
 package web; 
 
 import java.io.FileNotFoundException;  
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,11 +17,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import auxiliares.DatosFacebook; 
+import beans.BandaHoraria;
 import beans.Carrito;
+import beans.Categoria;
+import beans.Ciudad;
 import beans.Cliente; 
+import beans.Descuento;
 import beans.Empresa; 
+import beans.Medida;
+import beans.Partido;
 import beans.Pedido;
+import beans.Precio;
 import beans.Producto;
+import beans.Provincia;
 import beans.User;
 import service.ServiceManager;
 
@@ -54,6 +64,28 @@ public class InventoryController {
     	model.addAttribute("menu","menuAdmin.jsp");  
     	model.addAttribute("vista","hello.jsp"); 
     	return "frontend";
+    }
+    
+    @RequestMapping(value="/rellenar.htm")
+    public String completarBBDD( HttpSession session, HttpServletRequest req, ModelMap model) { 
+    	ArrayList<Precio> precios = new ArrayList<Precio>();
+    	precios.add(new Precio(14));
+    	ArrayList<Categoria> categos = new ArrayList<Categoria>();
+    	categos.add(this.productManager.guardarCategoria(new Categoria("caramelos")));
+    	this.productManager.guardarCiudad(new Ciudad("San fernando", 1425, 
+    			this.productManager.guardarPartido(new Partido("Del valle", 
+    					this.productManager.guardarProvincia(new Provincia("Catamarca")))
+    			), 10));
+    	this.productManager.guardarProducto(new Producto(
+    			"caramelo", 
+    			this.productManager.guardarMedida(new Medida("unidad", "unit")),
+    			precios,
+    			10,
+    			"comadrejas",
+    			true,
+    			categos));
+    	this.productManager.guardarBanda(new BandaHoraria(new Time(9,0,2), new Time(12,0,2), true));
+    	return "redirect:hello.htm";
     }
     
     @RequestMapping(value="/regist.htm")

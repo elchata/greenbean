@@ -261,4 +261,19 @@ public class Producto implements Serializable{
 	public int hashCode(){
 		return this.getIdProducto().intValue();
 	}
+	public Producto(String nombre, Medida medida, 
+			List<Precio> precios, int stock, String descripcion,
+			boolean activo, 
+			List<Categoria> categorias) {
+		super();
+		this.nombre = nombre;
+		this.medida = medida;
+		this.precios = precios;
+		this.stock = stock;
+		this.descripcion = descripcion;
+		this.activo = activo;
+		this.categorias = categorias;
+	}
+	
+	
 }

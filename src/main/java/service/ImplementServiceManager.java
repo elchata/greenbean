@@ -248,13 +248,13 @@ public class ImplementServiceManager implements ServiceManager {
 	 */
 	
 	@Override
-	public void guardarCategoria(Categoria cat) {
-		categoriaModel.actualizar(cat);		
+	public Categoria guardarCategoria(Categoria cat) {
+		return categoriaModel.actualizar(cat);		
 	}
 	
 	@Override
-	public void guardarMedida(Medida med) {
-		medidaModel.actualizar(med);		
+	public Medida guardarMedida(Medida med) {
+		return medidaModel.actualizar(med);		
 	}
 	
 	@Override
@@ -269,15 +269,15 @@ public class ImplementServiceManager implements ServiceManager {
 
 
 	@Override
-	public void guardarProducto(Producto prod) {
-		productoModel.actualizar(prod);
+	public Producto guardarProducto(Producto prod) {
+		return productoModel.actualizar(prod);
 		
 	}
 	
 
 	@Override
-	public void guardarPedido(Pedido aux) {
-		this.pedidoModel.actualizar(aux);
+	public Pedido guardarPedido(Pedido aux) {
+		return this.pedidoModel.actualizar(aux);
 		
 	}
 	
@@ -290,33 +290,33 @@ public class ImplementServiceManager implements ServiceManager {
 	
 
 	@Override
-	public void guardarDireccion(Direccion dir) {
-		direccionModel.actualizar(dir);
+	public Direccion guardarDireccion(Direccion dir) {
+		return direccionModel.actualizar(dir);
 	}
 
 
 
 	@Override
-	public void guardarProvincia(Provincia prov) {
-		provinciaModel.actualizar(prov);
+	public Provincia guardarProvincia(Provincia prov) {
+		return provinciaModel.actualizar(prov);
 	}
 	
 
 	@Override
-	public void guardarPartido(Partido par) {
-		partidoModel.actualizar(par);
+	public Partido guardarPartido(Partido par) {
+		return partidoModel.actualizar(par);
 		
 	}
 	
 	@Override
-	public void guardarBanda(BandaHoraria ban) {
-		bandaHorariaModel.actualizar(ban);
+	public BandaHoraria guardarBanda(BandaHoraria ban) {
+		return bandaHorariaModel.actualizar(ban);
 		
 	}
 	
 	@Override
-	public void guardarCiudad(Ciudad ciu) {
-		ciudadModel.actualizar(ciu);
+	public Ciudad guardarCiudad(Ciudad ciu) {
+		return ciudadModel.actualizar(ciu);
 	}
 
 	@Override

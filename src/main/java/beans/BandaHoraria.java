@@ -50,6 +50,15 @@ public class BandaHoraria implements Serializable { /**
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	public BandaHoraria(Time horaInicio, Time horaFin, boolean activo) {
+		super();
+		this.horaInicio = horaInicio;
+		this.horaFin = horaFin;
+		this.activo = activo;
+	}
+	public BandaHoraria() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	

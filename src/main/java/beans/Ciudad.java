@@ -64,5 +64,16 @@ public class Ciudad implements Serializable{
 	public void setCostoEnvio(double costoEnvio) {
 		this.costoEnvio = costoEnvio;
 	}
+	public Ciudad(String nombre, int codPost, Partido partido, double costoEnvio) {
+		super();
+		this.nombre = nombre;
+		this.codPost = codPost;
+		this.partido = partido;
+		this.costoEnvio = costoEnvio;
+	}
+	public Ciudad() {
+		// TODO Auto-generated constructor stub
+	}
 
+	
 }

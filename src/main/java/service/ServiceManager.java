@@ -82,15 +82,15 @@ public interface ServiceManager extends Serializable {
     
 /* POST */
     
-    public void guardarCategoria(Categoria cat);
+    public Categoria guardarCategoria(Categoria cat);
     
-    public void guardarMedida(Medida medida);
+    public Medida guardarMedida(Medida medida);
 
 	public void guardarEmpresa(Empresa emp);
 
-	public void guardarProducto(Producto prod);
+	public Producto guardarProducto(Producto prod);
 	
-	public void guardarPedido(Pedido aux);
+	public Pedido guardarPedido(Pedido aux);
 	
 	public Estado guardarEstado(Estado aux);
 
@@ -98,17 +98,17 @@ public interface ServiceManager extends Serializable {
 	
 	public Contenedor guardarContenedor(Contenedor aux);
 	
-	public void guardarProvincia(Provincia prov);
+	public Provincia guardarProvincia(Provincia prov);
 
-	public void guardarDireccion(Direccion dir);
+	public Direccion guardarDireccion(Direccion dir);
 
-    public void guardarPartido(Partido par);
+    public Partido guardarPartido(Partido par);
     
     public Carrito guardarCarrito(Carrito carrito);
 
-	public void guardarBanda(BandaHoraria ban);
+	public BandaHoraria guardarBanda(BandaHoraria ban);
 
-	public void guardarCiudad(Ciudad ciu);
+	public Ciudad guardarCiudad(Ciudad ciu);
 
 /* DETELE */
 	

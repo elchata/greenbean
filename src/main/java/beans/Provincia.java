@@ -55,6 +55,15 @@ public class Provincia implements Serializable{
 	public int hashCode(){
 		return this.getIdProvincia().intValue();
 	}
+	public Provincia(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+	public Provincia() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	
 
 }

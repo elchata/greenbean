@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -36,10 +37,8 @@ public abstract class Estado implements Serializable {
 	private Long idEstado;
 	private Date fecha;
 	private Estado anterior;
-	@ElementCollection
-	@CollectionTable(name="siguientes", joinColumns=@JoinColumn(name="idEstado"))
-	@Column(name="siguiente")
-	private ArrayList<String> siguiente = new ArrayList<String>();
+	
+	private List<String> siguiente = new ArrayList<String>();
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -71,10 +70,12 @@ public abstract class Estado implements Serializable {
 		this.anterior = anterior;
 	}
 	
-	public ArrayList<String> getSiguiente() {
+
+	@ElementCollection
+	public List<String> getSiguiente() {
 		return siguiente;
 	}
-	public void setSiguiente(ArrayList<String> siguiente) {
+	public void setSiguiente(List<String> siguiente) {
 		this.siguiente = siguiente;
 	}
 	public Estado(){

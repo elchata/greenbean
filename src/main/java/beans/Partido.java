@@ -52,6 +52,11 @@ public class Partido implements Serializable{
 	}
 	
 	
+	public Partido(String nombre, Provincia provincia) {
+		super();
+		this.nombre = nombre;
+		this.provincia = provincia;
+	}
 	public Partido(){
 		
 	}
