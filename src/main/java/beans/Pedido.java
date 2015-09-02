@@ -112,21 +112,5 @@ public class Pedido {
 	}
 	public void setAuxString(String auxString) {
 		this.auxString = auxString;
-	}
-	
-	
-	
-	/*
-	@Transient
-	private Long direccionaux=null ;
-	
-	@Transient
-	public Long getDireccionaux(){
-		return direccionaux;
-	}
-	@Transient
-	public void setDireccionaux(Long auxMon) {
-		this.direccionaux = auxMon;
-	}
-	*/
+	} 
 }

@@ -10,7 +10,7 @@
 				<tr>
 					<td>Logeado a travez de :  </td>
 					<td>
-					<form:select path="auxEmp">
+					<form:select path="empresa.idEmpresa">
 					 		<c:forEach items="${empresas}" var="emp" >
 					  			<c:choose>
 		                    		<c:when test="${emp.idEmpresa == command.empresa.idEmpresa}">

@@ -1,7 +1,6 @@
 package web; 
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashMap; 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import service.ServiceManager;  
-import beans.Cancelado;
-import beans.Carrito;
+import beans.Cancelado; 
 import beans.Cliente;
 import beans.Confirmado;
 import beans.Entregado;

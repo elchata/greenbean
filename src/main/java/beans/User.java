@@ -16,8 +16,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.Table; 
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -69,19 +68,6 @@ public abstract class User implements Serializable{
 	}
 	public void setIdFacebook(String idFacebook) {
 		this.idFacebook = idFacebook;
-	}
-	
-	//--------------VARIABLES AUXILIARES PARA QUE USE EL FORMULARIO
-	@Transient
-	public long auxEmp;
-
-	@Transient
-	public long getAuxEmp() {
-		return auxEmp;
-	}
-	@Transient
-	public void setAuxEmp(long auxEmp) {
-		this.auxEmp = auxEmp;
-	}
+	} 
 	
 }

@@ -116,7 +116,7 @@ public class ProductoController {
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
-	public String crearProducto(@ModelAttribute("command") Producto prod, ModelMap model) throws FileNotFoundException { 
+	public String crearProducto(@RequestParam("cates")String[] categs, @ModelAttribute("command") Producto prod, ModelMap model) throws FileNotFoundException { 
     	    
 		if (prod.getAuxImagen().exists() != false) prod.setImagen(this.productManager.subirFoto(prod.getAuxImagen()));
 		else {
@@ -128,7 +128,7 @@ public class ProductoController {
 		//reemplazando la que existia.
 		
 		List<Categoria> listaAuxiliar= new ArrayList<Categoria>(0);	
-		for(String cat: prod.getCategos()){
+		for(String cat: categs){
 			listaAuxiliar.add(this.productManager.darCategoria(Long.parseLong(cat)));
 		}
 		prod.setCategorias(listaAuxiliar);

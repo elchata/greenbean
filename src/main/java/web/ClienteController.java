@@ -45,8 +45,7 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value = "/create.htm", method = RequestMethod.POST)
-	public String creaCliente(@ModelAttribute("command") Cliente cli, ModelMap model) { 
-		cli.setEmpresa(this.productManager.darEmpresa(cli.getAuxEmp()));
+	public String creaCliente(@ModelAttribute("command") Cliente cli, ModelMap model) {  
 		this.productManager.guardarCliente(cli);
 	    model.addAttribute("clientes",this.productManager.darClientes()); 
 	    model.addAttribute("vista","ABMclientes.jsp");

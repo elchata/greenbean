@@ -218,21 +218,7 @@ public class Producto implements Serializable{
 	@Transient
 	public void setAuxImagen(File auxImagen) {
 		this.auxImagen = auxImagen;
-	}
-	
-	// para enviarle a los checkboxes de categorias
-	@Transient
-	private String[] categos;
-	@Transient
-	public String[] getCategos() {
-		return categos;
-	}
-	@Transient
-	public void setCategos(String[] categos) {
-		this.categos = categos;
-	}
-	
-	
+	} 	
 	
 	@Transient
 	private Long auxMon=null ;

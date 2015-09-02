@@ -53,10 +53,10 @@
 					<c:forEach items="${categorias}" var="cat">
 								<c:choose>
 		                    		<c:when test="${command.categorias.contains(cat)}"> 
-		                        		<form:checkbox path="categos" label="${cat.nombre}" value="${cat.idCategoria}" checked="checked"/> 
+		                        		<input type="checkbox" name="cates" value="${cat.idCategoria}" checked="checked"/>${cat.nombre}<input type="hidden" name="_cates" value="on"/>
 		                    		</c:when>
 		                    		<c:otherwise> 
-		                        		<form:checkbox path="categos" label="${cat.nombre}" value="${cat.idCategoria}"/>
+		                        		<input type="checkbox" name="cates" value="${cat.idCategoria}"/>${cat.nombre}<input type="hidden" name="_cates" value="on"/>
 		                    		</c:otherwise>
 		                		</c:choose>	
 					</c:forEach>
