@@ -38,6 +38,7 @@ public abstract class Estado implements Serializable {
 	private Date fecha;
 	private Estado anterior;
 	
+	private List<String> siguiente = new ArrayList<String>();
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -69,8 +70,14 @@ public abstract class Estado implements Serializable {
 		this.anterior = anterior;
 	}
 	
-	public abstract String[] siguiente();
-	
+
+	@ElementCollection
+	public List<String> getSiguiente() {
+		return siguiente;
+	}
+	public void setSiguiente(List<String> siguiente) {
+		this.siguiente = siguiente;
+	}
 	public Estado(){
 		
 	}

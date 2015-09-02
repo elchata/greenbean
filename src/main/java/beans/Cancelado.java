@@ -35,11 +35,6 @@ public class Cancelado extends Estado implements Serializable{
 	public Cancelado() {
 		super();
 	}
-	@Override
-	public String[] siguiente() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 

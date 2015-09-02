@@ -21,12 +21,6 @@ public class Entregado extends Estado implements Serializable {
 	public Entregado() {
 		super();
 	}
-
-	@Override
-	public String[] siguiente() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 

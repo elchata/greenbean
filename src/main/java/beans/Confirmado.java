@@ -11,7 +11,6 @@ public class Confirmado extends Estado implements Serializable {
 	/**
 	 * 
 	 */
-	
 	private static final long serialVersionUID = 1L;
 	private String observacion;
 	private Date fechaEntrega;
@@ -36,12 +35,9 @@ public class Confirmado extends Estado implements Serializable {
 		super(new Date());
 		this.setAnterior(nuevo);
 		this.setObservacion(observacion);
+		this.getSiguiente().add("Preparado");
+		this.getSiguiente().add("Cancelado");
 	}
 	
-	public String[] siguiente() {
-		String[] result = {"Preparado", "Cancelado"};
-		return result;
-	}
-	
-	
+
 }
