@@ -67,7 +67,7 @@ public class Pedido {
 		this.cliente = cliente;
 	}	
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "idEstado")
 	public Estado getEstado() {

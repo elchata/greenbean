@@ -72,6 +72,7 @@ public abstract class Estado implements Serializable {
 	
 
 	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	public List<String> getSiguiente() {
 		return siguiente;
 	}

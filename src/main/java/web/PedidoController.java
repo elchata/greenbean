@@ -40,6 +40,8 @@ public class PedidoController {
 	@RequestMapping(value="/ver.htm")
 	public String mostrarPedidos(ModelMap model) { 
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
+	    System.out.println("CLASSEEEEE");	
+	    System.out.println(this.productManager.darPedidos().get(0).getEstado().getClass());
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
 	}
