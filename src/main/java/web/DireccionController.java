@@ -68,8 +68,12 @@ public class DireccionController {
 	public String creaDireccion(@ModelAttribute("command") Direccion dir, ModelMap model, HttpSession session)  { 
     	if(dir.getIdDireccion() == null){
         	Cliente aux = (Cliente) session.getAttribute("sesion");
+	    	dir = this.productManager.guardarDireccion(dir);
+	    	
+	    	// para q tmb tenga la direccion creada en el user de la sesion..
+	    	// hay q ver si es necesario tener las dir del user actualizadas en sesion
+	    	
     		aux.getDirecciones().add(dir);
-	    	this.productManager.guardarCliente(aux);
 	    }
     	else
         	this.productManager.guardarDireccion(dir);

@@ -7,13 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection; 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;  
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany; 
+import javax.persistence.JoinColumn; 
 import javax.persistence.OneToMany; 
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -32,12 +29,9 @@ public class Cliente extends User implements Serializable {
 	private List<Pedido> pedidos = new ArrayList<Pedido>(0);
 	private Carrito carrito;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUser", referencedColumnName = "idUser")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(
-			name="cliente_direccion",
-		    joinColumns={@JoinColumn(name="idUser", referencedColumnName="idUser")},
-		    inverseJoinColumns={@JoinColumn(name="idDireccion", referencedColumnName="idDireccion")})
 	public List<Direccion> getDirecciones() {
 		return direcciones;
 	}

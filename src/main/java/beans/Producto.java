@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -131,7 +130,7 @@ public class Producto implements Serializable{
 		this.ventas = ventas;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	public List<Precio> getPrecios() {
