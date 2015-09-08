@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.List; 
 
+import beans.Administrador;
 import beans.BandaHoraria;
 import beans.Carrito;
 import beans.Categoria;
@@ -20,6 +21,7 @@ import beans.Partido;
 import beans.Pedido;
 import beans.Producto; 
 import beans.Provincia;
+import beans.SuperAdmin;
 import beans.User;
 
 public interface ServiceManager extends Serializable {
@@ -51,6 +53,10 @@ public interface ServiceManager extends Serializable {
 	public List<Producto> darProductos(String nombre);
 	
 	public List<BandaHoraria> darBandas();
+
+	public List<Administrador> darAdmins();
+	
+	public List<SuperAdmin> darSuperAdmins();
 	
 	/* Individuos */ 
 
@@ -80,6 +86,9 @@ public interface ServiceManager extends Serializable {
 
 	public Empresa darEmpresaPorNombre(String string);
     
+	public Administrador darAdminsitrador(Long val);
+	
+	public SuperAdmin darSuperAdmin(Long val);
 /* POST */
     
     public Categoria guardarCategoria(Categoria cat);
@@ -109,6 +118,12 @@ public interface ServiceManager extends Serializable {
 	public BandaHoraria guardarBanda(BandaHoraria ban);
 
 	public Ciudad guardarCiudad(Ciudad ciu);
+	
+	public Administrador guardarAdmin(Administrador admin);
+	
+	public SuperAdmin guardarSuperAdmin(SuperAdmin admin);
+	
+	
 
 /* DETELE */
 	
@@ -136,6 +151,10 @@ public interface ServiceManager extends Serializable {
 	
 	public void borrarCiudad(Long val);
     
+	public void borrarAdmin(Long val);
+	
+	public void borrarSuperAdmin(Long val);
+	
 /* AUX */
     
 	public byte[] subirFoto(File auxImagen) throws FileNotFoundException;

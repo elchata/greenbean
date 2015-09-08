@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component; 
 
+import beans.Administrador;
 import beans.BandaHoraria;
 import beans.Carrito;
 import beans.Categoria;
@@ -25,7 +26,9 @@ import beans.Partido;
 import beans.Pedido;
 import beans.Producto; 
 import beans.Provincia;
+import beans.SuperAdmin;
 import beans.User;
+import daos.AdministradorDAO;
 import daos.BandaHorariaDAO;
 import daos.CarritoDAO;
 import daos.CategoriaDAO;
@@ -40,6 +43,7 @@ import daos.PartidoDAO;
 import daos.PedidoDAO;
 import daos.ProductoDAO; 
 import daos.ProvinciaDAO;
+import daos.SuperAdminDAO;
 import daos.UserDAO;
 
 @Component
@@ -89,7 +93,12 @@ public class ImplementServiceManager implements ServiceManager {
     @Autowired
     private BandaHorariaDAO bandaHorariaModel;
     
+    @Autowired
+    private AdministradorDAO administradorModel;
 
+    @Autowired
+    private SuperAdminDAO superAdminModel;
+    
     @Autowired
     private EstadoDAO estadoModel;
 	
@@ -168,6 +177,15 @@ public class ImplementServiceManager implements ServiceManager {
 		return bandaHorariaModel.recuperarTodos();
 	}
 
+
+	@Override
+	public List<Administrador> darAdmins() {
+		return administradorModel.recuperarTodos();
+	}	
+	@Override
+	public List<SuperAdmin> darSuperAdmins() {
+		return superAdminModel.recuperarTodos();
+	}
 	/*
 	 * (non-Javadoc)
 	 * DELETES
@@ -241,7 +259,17 @@ public class ImplementServiceManager implements ServiceManager {
 	public void borrarCiudad(Long val) {
 		ciudadModel.borrar(val);		
 	}
+
+	@Override
+	public void borrarAdmin(Long val) {
+		administradorModel.borrar(val);
+	}
 	
+
+	@Override
+	public void borrarSuperAdmin(Long val) {
+		superAdminModel.borrar(val);
+	}
 	/*
 	 * (non-Javadoc)
 	 * SETTERS
@@ -325,6 +353,26 @@ public class ImplementServiceManager implements ServiceManager {
 		
 	}
 
+	@Override
+	public Contenedor guardarContenedor(Contenedor aux) {
+		// TODO Auto-generated method stub
+		return contenedorModel.actualizar(aux);
+	}
+
+
+	@Override
+	public Administrador guardarAdmin(Administrador admin) {
+		// TODO Auto-generated method stub
+		return administradorModel.actualizar(admin);
+	}
+
+	@Override
+	public SuperAdmin guardarSuperAdmin(SuperAdmin admin) {
+		// TODO Auto-generated method stub
+		return superAdminModel.actualizar(admin);
+	}
+
+
 	
 	/*
 	 * (non-Javadoc)
@@ -398,11 +446,22 @@ public class ImplementServiceManager implements ServiceManager {
 		return bandaHorariaModel.retornarPorId(val);
 	}
 
+
 	@Override
-	public Contenedor guardarContenedor(Contenedor aux) {
-		// TODO Auto-generated method stub
-		return contenedorModel.actualizar(aux);
+	public User darUser(long id) { 
+		return userModel.retornarPorId(id);
 	}
+
+	@Override
+	public Administrador darAdminsitrador(Long val) {
+		return administradorModel.retornarPorId(val);
+	}
+	
+	@Override
+	public SuperAdmin darSuperAdmin(Long val) {
+		return superAdminModel.retornarPorId(val);
+	}
+
 	
 	/*
 	 * (non-Javadoc)
@@ -431,16 +490,16 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 
-	@Override
-	public User darUser(long id) { 
-		return userModel.retornarPorId(id);
-	}
 
+	
 	@Override
 	public Empresa darEmpresaPorNombre(String string) {
 		// TODO Auto-generated method stub
 		return empresaModel.retornarPorNombre(string);
 	}
+
+
+
 
 
 	

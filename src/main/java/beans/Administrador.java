@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 
 @Entity(name = "admin")
-public class Adminsitrador extends User implements Serializable {
+public class Administrador extends User implements Serializable {
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class Adminsitrador extends User implements Serializable {
 		this.itemPorPagina = itemPorPagina;
 	}
 	
-	public Adminsitrador() {
+	public Administrador() {
 		super();
 		this.itemPorPagina = 50;
 	}
