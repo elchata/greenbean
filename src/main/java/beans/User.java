@@ -34,6 +34,7 @@ public abstract class User implements Serializable{
 	private Empresa empresa;
 	private Map<String,String> datos = new HashMap<String,String>();
 	private String idFacebook;
+	private int productosPorPagina;
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -68,6 +69,18 @@ public abstract class User implements Serializable{
 	}
 	public void setIdFacebook(String idFacebook) {
 		this.idFacebook = idFacebook;
+	}
+	public int getProductosPorPagina() {
+		return productosPorPagina;
+	}
+	public void setProductosPorPagina(int productosPorPagina) {
+		this.productosPorPagina = productosPorPagina;
+	}
+	public User() {
+		super();
+		this.productosPorPagina = 50;
 	} 
+	
+	
 	
 }
