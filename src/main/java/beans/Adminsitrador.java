@@ -1,6 +1,11 @@
 package beans;
 
-public class Adminsitrador extends User {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+
+@Entity(name = "admin")
+public class Adminsitrador extends User implements Serializable {
 
 	/**
 	 * 
