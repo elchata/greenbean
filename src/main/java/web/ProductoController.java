@@ -193,10 +193,13 @@ public class ProductoController {
    	public String adicionarCompra(HttpSession session, @ModelAttribute("compra") DatosCompra compra, ModelMap model) {  
     	Cliente aux = (Cliente) session.getAttribute("sesion");
     	Producto prod = this.productManager.darProducto(compra.getIdProducto());
-    	Carrito carro = aux.getCarrito();
+    	Carrito carro;
+    	if (aux != null) carro = aux.getCarrito();
+    	else carro = (Carrito) session.getAttribute("carro");
     	carro.getProductos().put(prod, compra.getCantidad());
     	carro.setFecha(new Date());
     	
+    	if (aux != null){
     	// subir cantidad de visitas del cliente y del producto
     	int cant = 1;
     	if (aux.getVisitas().containsKey(prod)) cant = aux.getVisitas().get(prod) + 1;
@@ -206,6 +209,8 @@ public class ProductoController {
     	// 
     	prod.getVisitas().put(aux, cant);
     	this.productManager.guardarProducto(prod);
+    	}
+    	else session.setAttribute("carro", carro);
     	
     	//++++++++++++++++++
     	 	

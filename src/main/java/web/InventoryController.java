@@ -3,6 +3,7 @@ package web;
 import java.io.FileNotFoundException;  
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +52,7 @@ public class InventoryController {
     public String printHello( ModelMap model, HttpSession session) throws FileNotFoundException {  
     	model.addAttribute("menu","menuAdmin.jsp");  
     	context.setAttribute("categorias", this.productManager.recuperarTodasCategorias());
+    	session.setAttribute("carro", new Carrito());
     	model.addAttribute("vista","hello.jsp"); 
         return "frontend";
     }  
@@ -67,7 +69,7 @@ public class InventoryController {
     	session.invalidate();
     	model.addAttribute("menu","menuAdmin.jsp");  
     	model.addAttribute("vista","hello.jsp"); 
-    	return "frontend";
+    	return "redirect:hello.htm";
     }
     
     @RequestMapping(value="/rellenar.htm")
@@ -111,6 +113,13 @@ public class InventoryController {
     public void iniciarSesion(HttpSession session, long id){
     	
     	Cliente cli = (Cliente) this.productManager.darCliente(id);
+    	Carrito carro = (Carrito) session.getAttribute("carro");
+    	if (carro != null && carro.getProductos().size() > 0 ) {
+    		Carrito miCar = cli.getCarrito();
+    		miCar.setProductos(carro.getProductos());
+    		miCar.setFecha(new Date());
+    		this.productManager.guardarCarrito(miCar);
+    	}    	
     	session.setAttribute("sesion", cli);
     	if (cli == null) {
     		User user = (User) this.productManager.darUser(id);

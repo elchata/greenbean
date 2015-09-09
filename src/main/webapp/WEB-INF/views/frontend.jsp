@@ -44,14 +44,28 @@
 <div id="carrito" style="width: 20%;padding:5px; float: left; border: 3px; border-style: solid; text-align: center">
 	<h3>Mi Pedido:</h3>
 	<c:set var="tot" value="0" />
-	<c:forEach items="${sessionScope.sesion.carrito.productos}" var="prod">
-	<br>
-		<c:out value="${prod.key.nombre}" />
-		<c:out value="${prod.value}" />	
-		<c:out value="${prod.key.medida.abreviacion}" />	 
-		<c:set var="tot" value="${prod.key.precios.get(0).monto * prod.value + tot}" />
-		<a href="<c:url value="/producto/quitar.htm?idKey=${prod.key.idProducto}"/>">Quitar</a>
-	</c:forEach>
+	<c:choose>
+		<c:when test="${sessionScope.sesion != null}">
+			<c:forEach items="${sessionScope.sesion.carrito.productos}" var="prod">
+			<br>
+				<c:out value="${prod.key.nombre}" />
+				<c:out value="${prod.value}" />	
+				<c:out value="${prod.key.medida.abreviacion}" />	 
+				<c:set var="tot" value="${prod.key.precios.get(0).monto * prod.value + tot}" />
+				<a href="<c:url value="/producto/quitar.htm?idKey=${prod.key.idProducto}"/>">Quitar</a>
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
+		   	<c:forEach items="${sessionScope.carro.productos}" var="prod">
+		   	<br>
+				<c:out value="${prod.key.nombre}" />
+				<c:out value="${prod.value}" />	
+				<c:out value="${prod.key.medida.abreviacion}" />	 
+				<c:set var="tot" value="${prod.key.precios.get(0).monto * prod.value + tot}" />
+				<a href="<c:url value="/producto/quitar.htm?idKey=${prod.key.idProducto}"/>">Quitar</a>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>	 
 	<h4>Total: $<c:out value="${tot}" /></h4>
 	<a href="<c:url value="/pedido/confirmarCompra.htm"/>">Confirmar Pedido</a>
 </div>
