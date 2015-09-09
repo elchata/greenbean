@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -21,8 +22,7 @@ import beans.BandaHoraria;
 import beans.Carrito;
 import beans.Categoria;
 import beans.Ciudad;
-import beans.Cliente; 
-import beans.Descuento;
+import beans.Cliente;  
 import beans.Empresa; 
 import beans.Medida;
 import beans.Partido;
@@ -40,13 +40,17 @@ public class InventoryController {
     @Autowired
     private ServiceManager productManager;
     
+    @Autowired
+    private ServletContext context; 
+    
     public void setProductManager(ServiceManager productManager) {
         this.productManager = productManager;
     }    
 
     @RequestMapping(value="/hello.htm")
-    public String printHello(ModelMap model, HttpSession session) throws FileNotFoundException {  
+    public String printHello( ModelMap model, HttpSession session) throws FileNotFoundException {  
     	model.addAttribute("menu","menuAdmin.jsp");  
+    	context.setAttribute("categorias", this.productManager.recuperarTodasCategorias());
     	model.addAttribute("vista","hello.jsp"); 
         return "frontend";
     }  
@@ -110,7 +114,7 @@ public class InventoryController {
     	session.setAttribute("sesion", cli);
     	if (cli == null) {
     		User user = (User) this.productManager.darUser(id);
-    		session.setAttribute("sesion", user);
+    		session.setAttribute("sesion", user); 
     	}
     }
     

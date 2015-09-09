@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="beans.User" %>
+<%@ page import="beans.User , beans.Categoria , java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -16,8 +16,11 @@
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script type="text/javascript" src='<c:url value="/resources/js/js-for-listBooks.js"/>'></script> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%
-	User sesion= (User)request.getSession().getAttribute("sesion");	
+<% 
+
+User sesion= (User)request.getSession().getAttribute("sesion");	
+	
+	
 %>
 <title>GreenBean</title> 
 </head>
@@ -34,7 +37,12 @@
 	<c:otherwise>
 		<div id="sesion"><a href=" <c:url value="/cliente/mostrar.htm?idCli=${sesion.idUser }"/>">Ver mi perfil</a> <a href=" <c:url value="/cerrarSesion.htm"/>">Cerrar Sesion</a></div>
 	</c:otherwise>
-</c:choose>  
+</c:choose>   
+
+<div id="menuCategorias"> 
+	<jsp:include page="menuCategorias.jsp" />
+ </div>
+ 
 <div id="cuerpo" style="width: 70%; float: left;">
 	<jsp:include page="${vista}" />
 </div> 

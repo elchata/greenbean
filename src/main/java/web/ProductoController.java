@@ -3,7 +3,10 @@ package web;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;  
+import java.util.HashSet;
 import java.util.List;  
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,16 +58,23 @@ public class ProductoController {
     @RequestMapping(value="result.htm", method = RequestMethod.POST)
 	public String resultProductos(HttpSession session,@ModelAttribute("find") DatosFormulario res,ModelMap model) {  
     	List<Producto> prods = this.productManager.darProductos(res.getNombre()); 
-    	model.addAttribute("productos", prods);  
-    	return this.listarProductos(session, model);
+    	return this.listarProductos(session, model, prods);
 	}
     
     @RequestMapping(value="filtro.htm", method = RequestMethod.GET)
-	public String resultFiltro(HttpSession session,@RequestParam(value = "cat") Categoria cat,ModelMap model) {  
-    	
-    	List<Producto> prods = cat.getProductos(); 
-    	model.addAttribute("productos", prods);  
-    	return this.listarProductos(session, model);
+	public String resultFiltro(HttpSession session,@RequestParam(value = "cat") Long cat,ModelMap model) {  
+    	Categoria cate = this.productManager.darCategoria(cat);
+    	List<Producto> prods = cate.getProductos();
+    	HashSet<Producto> hs = new HashSet<Producto>();
+    	for (Categoria m : cate.getHijos()) { 
+            prods.addAll(m.getProductos());
+    	}
+    	// para que no halla duplicados. Cuando se elije una categoria padre, se muestra
+    	// todos los productos de sus hijos y los productos q esten solo en la cat padre.
+    	hs.addAll(prods);
+    	prods.clear();
+    	prods.addAll(hs);
+    	return this.listarProductos(session, model, prods);
 	}
     
     @RequestMapping(value = "new.htm", method = RequestMethod.GET)
@@ -149,8 +159,16 @@ public class ProductoController {
 	    return "comprarProducto";
 	} 
     
-	public String listarProductos(HttpSession session,ModelMap model) {  
-	    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
+	public String listarProductos(HttpSession session,ModelMap model, List<Producto> prods) {  
+		// ordena a los productos por nombre
+		Collections.sort(prods, new Comparator<Producto>(){
+			@Override
+			public int compare(Producto o1, Producto o2) {
+				return o1.getNombre().compareTo(o2.getNombre());
+			}			
+		});
+		
+    	model.addAttribute("productos", prods);
 	    model.addAttribute("objForm", new DatosFormulario());
 	    
 	    // bean con los datos de producto y cantidad que luego son agregados al hashmap
@@ -167,9 +185,8 @@ public class ProductoController {
 	}
     
     @RequestMapping(value="listar.htm", method = RequestMethod.GET)
-	public String listarTodosProductos(HttpSession session,ModelMap model) {  
-	    model.addAttribute("productos",this.productManager.darProductos()); 
-	    return this.listarProductos(session, model);
+	public String listarTodosProductos(HttpSession session,ModelMap model) {   
+	    return this.listarProductos(session, model ,this.productManager.darProductos());
 	}
     @RequestMapping(value="agregarCarro.htm", method = RequestMethod.POST)
    	public String adicionarCompra(HttpSession session, @ModelAttribute("compra") DatosCompra compra, ModelMap model) {  
