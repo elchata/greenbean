@@ -179,7 +179,8 @@ public class ProductoController {
 	    
 	    model.addAttribute("vista","listarProductos.jsp");
 	    Cliente aux = (Cliente) session.getAttribute("sesion");
-	    if ( aux.getVisitasOrdenadas().size() > 0 )
+	    
+	    if (aux != null && aux.getVisitasOrdenadas().size() > 0 )
 	    	model.addAttribute("maximo", aux.getVisitasOrdenadas().firstKey()); 
 	    return "frontend";
 	}
