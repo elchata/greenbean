@@ -16,12 +16,7 @@
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script type="text/javascript" src='<c:url value="/resources/js/js-for-listBooks.js"/>'></script> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<% 
 
-User sesion= (User)request.getSession().getAttribute("sesion");	
-	
-	
-%>
 <title>GreenBean</title> 
 </head>
 <body>
@@ -29,13 +24,13 @@ User sesion= (User)request.getSession().getAttribute("sesion");
 	<jsp:include page="menuAdmin.jsp" />
 </nav>
 <c:choose >
-	<c:when test="${sesion == null}">
+	<c:when test="${sessionScope.sesion == null}">
 		<div id="logg">
 			<a href="<c:url value="/login.htm"/>">Iniciar Sesion</a>
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div id="sesion"><a href=" <c:url value="/cliente/mostrar.htm?idCli=${sesion.idUser }"/>">Ver mi perfil</a> <a href=" <c:url value="/cerrarSesion.htm"/>">Cerrar Sesion</a></div>
+		<div id="sesion"><a href=" <c:url value="/cliente/mostrar.htm?idCli=${sessionScope.sesion.idUser }"/>">Ver mi perfil</a> <a href=" <c:url value="/cerrarSesion.htm"/>">Cerrar Sesion</a></div>
 	</c:otherwise>
 </c:choose>   
 
@@ -49,7 +44,7 @@ User sesion= (User)request.getSession().getAttribute("sesion");
 <div id="carrito" style="width: 20%;padding:5px; float: left; border: 3px; border-style: solid; text-align: center">
 	<h3>Mi Pedido:</h3>
 	<c:set var="tot" value="0" />
-	<c:forEach items="${sesion.carrito.productos}" var="prod">
+	<c:forEach items="${sessionScope.sesion.carrito.productos}" var="prod">
 	<br>
 		<c:out value="${prod.key.nombre}" />
 		<c:out value="${prod.value}" />	
