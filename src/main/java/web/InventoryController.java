@@ -44,12 +44,15 @@ public class InventoryController {
     @Autowired
     private ServletContext context; 
     
+    @Autowired
+    public HttpSession session;
+    
     public void setProductManager(ServiceManager productManager) {
         this.productManager = productManager;
     }    
 
     @RequestMapping(value="/hello.htm")
-    public String printHello( ModelMap model, HttpSession session) throws FileNotFoundException {  
+    public String printHello( ModelMap model ) throws FileNotFoundException {  
     	model.addAttribute("menu","menuAdmin.jsp");  
     	context.setAttribute("categorias", this.productManager.recuperarTodasCategorias());
     	session.setAttribute("carro", new Carrito());
@@ -65,7 +68,7 @@ public class InventoryController {
     }  
     
     @RequestMapping(value="/cerrarSesion.htm")
-    public String cerrarSesion(HttpSession session, ModelMap model){    	
+    public String cerrarSesion(ModelMap model){    	
     	session.invalidate();
     	model.addAttribute("menu","menuAdmin.jsp");  
     	model.addAttribute("vista","hello.jsp"); 
@@ -73,7 +76,7 @@ public class InventoryController {
     }
     
     @RequestMapping(value="/rellenar.htm")
-    public String completarBBDD( HttpSession session, HttpServletRequest req, ModelMap model) { 
+    public String completarBBDD(HttpServletRequest req, ModelMap model) { 
     	ArrayList<Precio> precios = new ArrayList<Precio>();
     	precios.add(new Precio(14));
     	ArrayList<Categoria> categos = new ArrayList<Categoria>();
@@ -95,11 +98,11 @@ public class InventoryController {
     }
     
     @RequestMapping(value="/regist.htm")
-    public String registrar( HttpSession session, HttpServletRequest req, ModelMap model) { 
+    public String registrar(HttpServletRequest req, ModelMap model) { 
 		String val = req.getParameter("id");
 		Long idUser = this.productManager.existeUser(val);
 		if (idUser != null ) {
-			this.iniciarSesion(session, idUser);
+			this.iniciarSesion(idUser);
 			return "redirect:hello.htm";
 		}
 		else {
@@ -110,7 +113,7 @@ public class InventoryController {
 		} 
     } 
     
-    public void iniciarSesion(HttpSession session, long id){
+    public void iniciarSesion(long id){
     	
     	Cliente cli = (Cliente) this.productManager.darCliente(id);
     	Carrito carro = (Carrito) session.getAttribute("carro");

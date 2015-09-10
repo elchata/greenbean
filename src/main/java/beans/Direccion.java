@@ -113,5 +113,17 @@ public class Direccion implements Serializable {
 		this.ciudad = ciudad;
 	}
 	
+	@Override
+	 public boolean equals (Object obj) {
+
+       if (obj instanceof Direccion) {
+           Direccion tmpCateg = (Direccion) obj;
+           if (this.getIdDireccion().equals(tmpCateg.getIdDireccion()) ) {
+               return true; } 
+           else { return false; }
+
+       }  else { return false; }
+   } // Cierre del método equals
+	
 
 }
