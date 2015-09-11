@@ -82,7 +82,7 @@ public class DireccionController {
 	    	
 	    	// para q tmb tenga la direccion creada en el user de la sesion..
 	    	// hay q ver si es necesario tener las dir del user actualizadas en sesion
-	    	
+	    	aux.getDirecciones().remove(dir);
     		aux.getDirecciones().add(dir);
 	    }
     	else

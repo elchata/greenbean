@@ -2,7 +2,9 @@ package web;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +24,9 @@ public class CategoriaController {
 	 
 	  	@Autowired
 	    private ServiceManager productManager;
+	  	
+	  	@Autowired
+	    private ServletContext context; 
 	    
 	    public void setProductManager(ServiceManager productManager) {
 	        this.productManager = productManager;
@@ -51,8 +56,14 @@ public class CategoriaController {
 				if (cat.getIdCategoria() != null) cat.setImagen(this.productManager.darCategoria(cat.getIdCategoria()).getImagen());
 				else cat.setImagen(null);
 			}
-			this.productManager.guardarCategoria(cat);
-		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias()); 
+			Categoria catego  = this.productManager.guardarCategoria(cat);
+			
+			// ACTUALIZA LAS CATEGORIAS DEL CONTEXT
+			@SuppressWarnings("unchecked")
+			List<Categoria> list = (List<Categoria>)context.getAttribute("categorias");
+			list.remove(catego);
+			list.add(catego);
+			model.addAttribute("categorias",this.productManager.recuperarTodasCategorias()); 
 		    model.addAttribute("vista","ABMcategorias.jsp");
 		    return "frontend";
 		}
@@ -69,7 +80,14 @@ public class CategoriaController {
 		@RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
 		public String eliminarCategoria(HttpServletRequest req, ModelMap model) { 
 			Long val = Long.parseLong(req.getParameter("idCat"));
+			Categoria catego = this.productManager.darCategoria(val);
 			this.productManager.borrarCategoria(val);			
+
+			// ACTUALIZA LAS CATEGORIAS DEL CONTEXT
+			@SuppressWarnings("unchecked")
+			List<Categoria> list = (List<Categoria>)context.getAttribute("categorias");
+			list.remove(catego);
+			
 		    model.addAttribute("categorias", this.productManager.recuperarTodasCategorias());  
 		    model.addAttribute("vista","ABMcategorias.jsp");
 		    return "frontend";

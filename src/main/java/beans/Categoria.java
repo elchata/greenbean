@@ -143,7 +143,7 @@ public class Categoria implements Serializable{
 
         if (obj instanceof Categoria) {
             Categoria tmpCateg = (Categoria) obj;
-            if (this.getNombre().equals(tmpCateg.getNombre()) ) {
+            if (this.getIdCategoria().equals(tmpCateg.getIdCategoria()) ) {
                 return true; } 
             else { return false; }
 
