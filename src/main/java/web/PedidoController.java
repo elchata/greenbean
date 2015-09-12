@@ -47,9 +47,8 @@ public class PedidoController {
 	public String avanzarPedido(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idPed"));
 		Pedido ped = this.productManager.darPedido(val);
-		model.addAttribute("command", ped);
-		model.addAttribute("vista","editar"+req.getParameter("nombre")+".jsp");
-    	return "frontend";
+		model.addAttribute("command", ped); 
+    	return "editar"+req.getParameter("nombre");
 	}
     
     @RequestMapping(value = "miPedido.htm", method = RequestMethod.GET)

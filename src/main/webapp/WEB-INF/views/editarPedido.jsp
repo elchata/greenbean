@@ -8,24 +8,28 @@
 		<form:form method="POST" action="./create.htm" modelattribute="command">		
 			<table>
 				<tr>
-					<td>Precio Total productos : </td>
-					<td><form:input path="precioFinal" value="${command.precioFinal}"/></td>
+					<td>Precio Total productos : 
+					<form:input path="precioFinal" value="${command.precioFinal}"/></td>
 				</tr>
 				
 				<form:hidden path="cliente.idUser"/> 
 				<form:hidden path="idPedido"/>		
-				<tr>
-					<td>Direccion : </td>
-					<c:forEach items="${command.cliente.direcciones}" var="dir">
-							<form:radiobutton path="direccion.idDireccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}"/> 
+				<tr><td>
+				
+					<c:forEach items="${command.cliente.direcciones}" var="dir" varStatus="cant">
+						<fieldset> 
+						<legend>Domicilio ${cant.count}</legend>
+						<form:radiobutton path="direccion.idDireccion" label="${dir.calle} ${dir.ciudad.nombre} ${dir.ciudad.partido.nombre }" value="${dir.idDireccion}"/> 
+						</fieldset>
 					</c:forEach>
-				</tr>	
-				<form:textarea path="auxString" rows="5" cols="30" />		 
+					<a href="<c:url value="/direccion/new.htm"/>">Agregar Domicilio</a> 
+				</td></tr>
+				<tr>	
+					<td><form:textarea path="auxString" rows="3" cols="40" placeholder="Agregue algun dato extra..." /></td>	
+				</tr>	 
 				<tr>
 					<td colspan="3"><input type="submit" value="Enviar Datos"/></td>
 				</tr>
 			</table>
 		</form:form>
 		<br>
-		
-<a href="./ver.htm">Ver Pedidos</a> 

@@ -18,11 +18,11 @@
   </tr>
   <c:forEach items="${pedidos}" var="ped">	
 	  <tr>
-	    <td><c:out value="${ped.precioFinal}"/></td>
+	    <td>$ <c:out value="${ped.precioFinal}"/></td>
 	    <td><c:out value="${ped.cliente.idUser}"/></td>
 	    <td>
 	    <select onchange="editarEstado(this.value, ${ped.idPedido})">
-	    <option value="${ped.estado.idEstado }" selected="selected">${ped.estado['class'].toString()}</option>
+	    <option value="${ped.estado.idEstado }" selected="selected">${ped.estado.getClass().getSimpleName()}</option>
 	    <c:forEach items="${ped.estado.siguiente}" var="est">
 		     <option value="${est}" >${est}</option>		
 		</c:forEach> 
