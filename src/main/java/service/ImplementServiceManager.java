@@ -499,6 +499,13 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 
+	@Override
+	public List<Producto> darProductosAListar() {
+		// TODO Auto-generated method stub
+		return productoModel.darProductosDisponibles();
+	}
+
+
 
 
 

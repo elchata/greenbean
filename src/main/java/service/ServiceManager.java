@@ -34,6 +34,8 @@ public interface ServiceManager extends Serializable {
     
     public List<Producto> darProductos();
     
+    public List<Producto> darProductosAListar();
+    
     public List<Pedido> darPedidos();
 
     public List<Partido> darPartidos();

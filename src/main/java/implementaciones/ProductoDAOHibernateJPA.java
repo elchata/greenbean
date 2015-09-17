@@ -25,4 +25,12 @@ public class ProductoDAOHibernateJPA extends GenericDAOHibernateJPA<Producto>  i
 			return entity;
 		}
 
+		@Override
+		public List<Producto> darProductosDisponibles() {
+			Query consulta= this.getEntityManager().createQuery("select c from Producto c where c.activo = 1 and c.stock > 0");
+			@SuppressWarnings("unchecked")
+			List<Producto> entity = consulta.getResultList();
+			return entity;
+		}
+
 }

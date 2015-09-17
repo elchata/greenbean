@@ -187,7 +187,7 @@ public class ProductoController {
     
     @RequestMapping(value="listar.htm", method = RequestMethod.GET)
 	public String listarTodosProductos(HttpSession session,ModelMap model) {   
-	    return this.listarProductos(session, model ,this.productManager.darProductos());
+	    return this.listarProductos(session, model ,this.productManager.darProductosAListar());
 	}
     @RequestMapping(value="agregarCarro.htm", method = RequestMethod.POST)
    	public String adicionarCompra(HttpSession session, @ModelAttribute("compra") DatosCompra compra, ModelMap model) {  
