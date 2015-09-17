@@ -56,14 +56,13 @@ public class CategoriaController {
 				if (cat.getIdCategoria() != null) cat.setImagen(this.productManager.darCategoria(cat.getIdCategoria()).getImagen());
 				else cat.setImagen(null);
 			}
-			Categoria catego  = this.productManager.guardarCategoria(cat);
+			this.productManager.guardarCategoria(cat);
 			
-			// ACTUALIZA LAS CATEGORIAS DEL CONTEXT
-			@SuppressWarnings("unchecked")
-			List<Categoria> list = (List<Categoria>)context.getAttribute("categorias");
-			list.remove(catego);
-			list.add(catego);
-			model.addAttribute("categorias",this.productManager.recuperarTodasCategorias()); 
+			// ACTUALIZA LAS CATEGORIAS DEL CONTEXT 
+			List<Categoria> list = this.productManager.recuperarTodasCategorias();			
+			context.setAttribute("categorias", list);
+
+			model.addAttribute("categorias", list); 
 		    model.addAttribute("vista","ABMcategorias.jsp");
 		    return "frontend";
 		}
@@ -80,15 +79,15 @@ public class CategoriaController {
 		@RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
 		public String eliminarCategoria(HttpServletRequest req, ModelMap model) { 
 			Long val = Long.parseLong(req.getParameter("idCat"));
-			Categoria catego = this.productManager.darCategoria(val);
+			this.productManager.darCategoria(val);
 			this.productManager.borrarCategoria(val);			
 
-			// ACTUALIZA LAS CATEGORIAS DEL CONTEXT
-			@SuppressWarnings("unchecked")
-			List<Categoria> list = (List<Categoria>)context.getAttribute("categorias");
-			list.remove(catego);
+			// ACTUALIZA LAS CATEGORIAS DEL CONTEXT 
+			List<Categoria> list = this.productManager.recuperarTodasCategorias();
 			
-		    model.addAttribute("categorias", this.productManager.recuperarTodasCategorias());  
+			context.setAttribute("categorias", list);
+			
+		    model.addAttribute("categorias", list);  
 		    model.addAttribute("vista","ABMcategorias.jsp");
 		    return "frontend";
 		}

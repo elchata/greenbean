@@ -13,9 +13,9 @@
 		<c:url var="actionUrl" value="/producto/agregarCarro.htm" /> 
 		<form:form method="POST" action="${actionUrl }" commandName="compra">	 
 			<form:select id="mult" path="cantidad" onchange="multiplicar(${producto.precios.get(0).monto})"> 
-				 <% for(int i = 1; i < 30; i+=1) { %>
-				        <form:option value="<%=i %>"/> 
-				  <% } %>		                    		 
+				<c:forEach var="i" begin="1" end="${producto.stock}">
+   					<form:option value="${i}"/>
+				</c:forEach>	                    		 
 			</form:select>
 			<c:out value="${producto.medida.abreviacion}"/>
 			<form:hidden path="idProducto" value="${producto.idProducto}"/>		

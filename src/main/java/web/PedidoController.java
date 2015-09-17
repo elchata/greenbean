@@ -1,6 +1,7 @@
 package web; 
 
 import java.util.HashMap; 
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -74,14 +75,30 @@ public class PedidoController {
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model, HttpSession session) { 
+
+    	Cliente aux = (Cliente) session.getAttribute("sesion");
+    	ped.setProductos(aux.getCarrito().getProductos());
+    	// renueva los stock de los productos involucrados en el pedido.
+    	// faltaria en el caso q el stock no sea suficiente se avise mediante pantalla
+    	System.out.println("ANTES DE ENTRAR");
+    	
+    	Map<Producto, Integer> map = ped.getProductos();
+    	for (Map.Entry<Producto, Integer> entry : map.entrySet()) {
+    	    Producto produc = entry.getKey();
+    	    Integer cant = entry.getValue();
+    	    System.out.println("CANTIDAD A DESCONTAR" + cant);
+    	    produc.setStock(produc.getStock() - cant);
+    	    System.out.println("CANTIDAD TOTAL" + produc.getStock());
+    	    this.productManager.guardarProducto(produc); 
+    	}
+
+    	aux.getCarrito().setProductos(new HashMap<Producto, Integer>());
+    	this.productManager.guardarCliente(aux);
     	Nuevo nuevo = new Nuevo();
     	nuevo.setDetalle(ped.getAuxString());
     	nuevo = (Nuevo) this.productManager.guardarEstado(nuevo);
     	ped.setEstado(nuevo);
     	this.productManager.guardarPedido(ped);
-    	Cliente aux = (Cliente) session.getAttribute("sesion");
-    	aux.getCarrito().setProductos(new HashMap<Producto, Integer>());;
-    	this.productManager.guardarCliente(aux);
 	    model.addAttribute("pedidos",this.productManager.darPedidos()); 
 	    model.addAttribute("vista","ABMpedidos.jsp");
 	    return "frontend";
@@ -134,8 +151,9 @@ public class PedidoController {
 	}
     
     @RequestMapping(value="confirmarCompra.htm", method = RequestMethod.GET)
-    public String confirmarPedido(HttpServletRequest req, ModelMap model, HttpSession session){
+    public String confirmarPedido ( ModelMap model, HttpSession session){
     	Cliente aux = (Cliente) session.getAttribute("sesion");
+    	if (aux == null) return "redirect:../login.htm";
 		Pedido nuevo = new Pedido(aux);
 		model.addAttribute("command", nuevo);
 		model.addAttribute("vista","editarPedido.jsp");
