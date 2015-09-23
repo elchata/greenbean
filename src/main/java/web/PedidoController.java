@@ -77,11 +77,15 @@ public class PedidoController {
 	public String creaPedido(@ModelAttribute("command") Pedido ped, ModelMap model, HttpSession session) { 
 
     	Cliente aux = (Cliente) session.getAttribute("sesion");
+    	
+    	// no se envia x formulario la lista de productos, x lo tanto hay q volver a 
+    	// sacarlas del carrito
+    	
     	ped.setProductos(aux.getCarrito().getProductos());
+    	
     	// renueva los stock de los productos involucrados en el pedido.
     	// faltaria en el caso q el stock no sea suficiente se avise mediante pantalla
-    	System.out.println("ANTES DE ENTRAR");
-    	
+    	    	
     	Map<Producto, Integer> map = ped.getProductos();
     	for (Map.Entry<Producto, Integer> entry : map.entrySet()) {
     	    Producto produc = entry.getKey();
@@ -113,6 +117,20 @@ public class PedidoController {
     @RequestMapping(value = "/guardarCancelado.htm", method = RequestMethod.POST)
 	public String avanzaCancelado(@ModelAttribute("command") Pedido ped, ModelMap model) { 
     	Cancelado estado = new Cancelado(ped.getEstado(), ped.getAuxString());
+    	
+    	// el pedido enviado x el command no tiene los productos asociados, hay 
+    	// q ir a la bbdd a buscarlos.
+    	ped = this.productManager.darPedido(ped.getIdPedido());
+    	
+    	// renueva los stock de los productos involucrados en el pedido.
+    	
+    	Map<Producto, Integer> map = ped.getProductos();
+    	for (Map.Entry<Producto, Integer> entry : map.entrySet()) {
+    	    Producto produc = entry.getKey();
+    	    Integer cant = entry.getValue();
+    	    produc.setStock(produc.getStock() + cant);
+    	    this.productManager.guardarProducto(produc); 
+    	}
     	return this.avanzar(ped, model, estado);
 	} 
     

@@ -65,6 +65,14 @@ function editarProv(id) {
 	});
 } 
 
+function editarStock(id) {
+	$.get("editarStock.htm?idProd=" + id, function(result) {
+		$("#queryDialog").html(result);
+		$('#queryDialog').dialog("option", "title", 'Editar Stock');
+		$("#queryDialog").dialog('open'); 
+	});
+} 
+
 function editarEstado(nombre, id) {
 	$.get("cambiarEstado.htm?nombre="+nombre+"&idPed=" + id, function(result) {
 		$("#queryDialog").html(result);

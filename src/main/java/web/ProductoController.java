@@ -43,6 +43,7 @@ public class ProductoController {
     
     @RequestMapping(value="ver.htm")
 	public String mostrarProductos(ModelMap model) { 
+    	model.addAttribute("prod", new Producto());
 	    model.addAttribute("productos",this.productManager.darProductos()); 
 	    model.addAttribute("vista","ABMproductos.jsp");
 	    return "frontend";
@@ -119,10 +120,15 @@ public class ProductoController {
     @RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
 	public String eliminarProducto(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idProd"));
-		this.productManager.borrarProducto(val);			
-	    model.addAttribute("productos", this.productManager.darProductos());  
-	    model.addAttribute("vista","ABMproductos.jsp");
-	    return "frontend";
+		this.productManager.borrarLogicoProducto(val);			
+		return "redirect:ver.htm";
+	}
+    
+    @RequestMapping(value="/cambiarActivo.htm", method = RequestMethod.GET)
+	public String cambiarActivoProducto(HttpServletRequest req, ModelMap model) { 
+		Long val = Long.parseLong(req.getParameter("idProd"));
+		this.productManager.cambioLogicoProducto(val);			
+		return "redirect:ver.htm";
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
@@ -146,9 +152,7 @@ public class ProductoController {
 		if ((prod.getPrecios().isEmpty()) || (prod.obtenerPrecio() != prod.getAuxMon()))
 			prod.agregarPrecio(new Precio(prod.getAuxMon()));
 		this.productManager.guardarProducto(prod);
-	    model.addAttribute("productos",this.productManager.darProductos()); 
-	    model.addAttribute("vista","ABMproductos.jsp");
-	    return "frontend";
+		return "redirect:ver.htm";
 	}
     
     @RequestMapping(value="mostrar.htm", method = RequestMethod.GET)
@@ -227,4 +231,19 @@ public class ProductoController {
     	this.productManager.guardarCarrito(carro);
     	return "redirect:listar.htm";
    	}
+    
+    @RequestMapping(value="editarStock.htm", method = RequestMethod.GET)
+   	public String cambiarStock(@RequestParam("idProd") Long val, ModelMap model) {  
+   	    model.addAttribute("prod", this.productManager.darProducto(val));
+   	    return "editStock";
+   	}
+    
+    @RequestMapping(value="cambiarStock.htm", method = RequestMethod.POST)
+   	public String changeStock(@ModelAttribute("prod") Producto prod, ModelMap model) {  
+   	    Producto aux =this.productManager.darProducto(prod.getIdProducto());
+   	    aux.setStock(prod.getStock());
+   	    this.productManager.guardarProducto(aux);
+   	    return "redirect:ver.htm";
+   	}
+       
 }

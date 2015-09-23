@@ -163,7 +163,9 @@ public interface ServiceManager extends Serializable {
 	
 	public Long existeUser(String id);
 
-
+	public void borrarLogicoProducto(Long val);
+	
+	public void cambioLogicoProducto(Long val);
 
 
 

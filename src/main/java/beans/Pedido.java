@@ -5,7 +5,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -94,7 +93,7 @@ public class Pedido {
 	public Pedido() {
 		super();
 	}
-	@OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "idDireccion")
 	public Direccion getDireccion() {

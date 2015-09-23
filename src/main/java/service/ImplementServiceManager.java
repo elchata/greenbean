@@ -506,6 +506,21 @@ public class ImplementServiceManager implements ServiceManager {
 	}
 
 
+	@Override
+	public void borrarLogicoProducto(Long val) {
+		Producto prod = this.darProducto(val);
+		prod.setActivo(false);
+		this.guardarProducto(prod);		
+	}
+
+	@Override
+	public void cambioLogicoProducto(Long val) {
+		Producto prod = this.darProducto(val);
+		prod.setActivo(!prod.isActivo());
+		this.guardarProducto(prod);			
+	}
+
+
 
 
 

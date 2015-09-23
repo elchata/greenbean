@@ -48,17 +48,13 @@ public class BandaHorariaController {
 	public String eliminarBanda(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idBanda"));
 		this.productManager.borrarBanda(val);			
-	    model.addAttribute("bandas", this.productManager.darBandas());  
-	    model.addAttribute("vista","ABMbandas.jsp");
-	    return "frontend";
+		return "redirect:ver.htm";
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaPedido(@ModelAttribute("banda") BandaHoraria banda, ModelMap model) { 
     	this.productManager.guardarBanda(banda);
-	    model.addAttribute("bandas",this.productManager.darBandas()); 
-	    model.addAttribute("vista","ABMbandas.jsp");
-	    return "frontend";
+    	return "redirect:ver.htm";
 	}
     
     @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)

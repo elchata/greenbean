@@ -34,8 +34,7 @@ public class CategoriaController {
 
 		@RequestMapping(value="/ver.htm")
 		public String mostrarCategorias(ModelMap model) { 
-		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias());
-		    model.addAttribute("menu","menuAdmin.jsp");
+		    model.addAttribute("categorias",this.productManager.recuperarTodasCategorias()); 
 		    model.addAttribute("vista","ABMcategorias.jsp");
 		    return "frontend";
 		}

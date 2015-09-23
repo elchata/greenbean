@@ -53,17 +53,13 @@ public class MedidaController {
 	public String eliminarMedida(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idMed"));
 		this.productManager.borrarMedida(val);			
-	    model.addAttribute("medidas", this.productManager.darMedidas());  
-	    model.addAttribute("vista","ABMmedidas.jsp");
-	    return "frontend";
+		return "redirect:ver.htm";
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaMedida(@ModelAttribute("command") Medida med, ModelMap model)  { 
     	this.productManager.guardarMedida(med);
-	    model.addAttribute("medidas",this.productManager.darMedidas()); 
-	    model.addAttribute("vista","ABMmedidas.jsp");
-	    return "frontend";
+    	return "redirect:ver.htm";
 	}
     
     @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)

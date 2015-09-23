@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-		<c:url var="actionUrl" value="guardarConfirmado.htm" /> 
+		<c:url var="actionUrl" value="guardarCancelado.htm" /> 
 		
 		<form:form id="queryForm" action="${actionUrl }" commandName="command" method="post">		
 			<fieldset>

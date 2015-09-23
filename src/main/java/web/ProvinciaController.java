@@ -50,20 +50,14 @@ public class ProvinciaController {
     @RequestMapping(value="/eliminar.htm", method = RequestMethod.GET)
 	public String eliminarProvincia(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idProv"));
-		this.productManager.borrarProvincia(val);			
-	    model.addAttribute("provincias", this.productManager.darProvincias());  
-	    model.addAttribute("provinc", new Provincia());  
-	    model.addAttribute("vista","ABMprovincias.jsp");
-	    return "frontend";
-	}
+		this.productManager.borrarProvincia(val);
+		return "redirect:ver.htm";
+    }
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaProvincia(@ModelAttribute("provinc") Provincia prov, ModelMap model) { 
     	this.productManager.guardarProvincia(prov);
-	    model.addAttribute("provincias",this.productManager.darProvincias()); 
-	    model.addAttribute("provinc", new Provincia());
-	    model.addAttribute("vista","ABMprovincias.jsp");
-	    return "frontend";
+    	return "redirect:ver.htm";
 	}
     
     @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)

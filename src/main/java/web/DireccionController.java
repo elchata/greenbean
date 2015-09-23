@@ -69,9 +69,7 @@ public class DireccionController {
 		
 		Cliente aux = (Cliente) session.getAttribute("sesion");
     	aux.getDirecciones().remove(auxDir);
-	    model.addAttribute("direcciones",this.productManager.darDirecciones()); 
-	    model.addAttribute("vista","ABMdirecciones.jsp");
-	    return "frontend";
+    	return "redirect:ver.htm";
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
@@ -87,9 +85,7 @@ public class DireccionController {
 	    }
     	else
         	this.productManager.guardarDireccion(dir);
-	    model.addAttribute("direcciones",this.productManager.darDirecciones()); 
-	    model.addAttribute("vista","ABMdirecciones.jsp");
-	    return "frontend";
+    	return "redirect:ver.htm";
 	}
     
     @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)

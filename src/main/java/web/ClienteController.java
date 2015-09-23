@@ -47,9 +47,7 @@ public class ClienteController {
 	@RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaCliente(@ModelAttribute("command") Cliente cli, ModelMap model) {  
 		this.productManager.guardarCliente(cli);
-	    model.addAttribute("clientes",this.productManager.darClientes()); 
-	    model.addAttribute("vista","ABMclientes.jsp");
-	    return "frontend";
+		return "redirect:ver.htm";
 	}
 	
 	@RequestMapping(value = "/create2.htm", method = RequestMethod.POST)
@@ -79,9 +77,7 @@ public class ClienteController {
 	public String eliminarCliente(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idCli"));
 		this.productManager.borrarCliente(val);			
-	    model.addAttribute("clientes", this.productManager.darClientes());  
-	    model.addAttribute("vista","ABMclientes.jsp");
-	    return "frontend";
+		return "redirect:ver.htm";
 	}
 	
 	@RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)

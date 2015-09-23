@@ -56,17 +56,13 @@ public class CiudadController {
 	public String eliminarCiudad(HttpServletRequest req, ModelMap model) { 
 		Long val = Long.parseLong(req.getParameter("idCiu"));
 		this.productManager.borrarCiudad(val);			
-	    model.addAttribute("ciudades",this.productManager.darCiudades()); 
-	    model.addAttribute("vista","ABMciudades.jsp");
-	    return "frontend";
+		return "redirect:ver.htm";
 	}
     
     @RequestMapping(value = "/create.htm", method = RequestMethod.POST)
 	public String creaCiudad(@ModelAttribute("ciudadForm") Ciudad ciu,@ModelAttribute("partidoForm") Partido part, ModelMap model)  {  
     	this.productManager.guardarCiudad(ciu);
-	    model.addAttribute("ciudades",this.productManager.darCiudades()); 
-	    model.addAttribute("vista","ABMciudades.jsp");
-	    return "frontend";
+    	return "redirect:ver.htm";
 	}
     
     @RequestMapping(value="/mostrar.htm", method = RequestMethod.GET)
