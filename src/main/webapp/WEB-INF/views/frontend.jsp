@@ -9,12 +9,14 @@
 <html>
 <head>  
 <link rel="stylesheet" href='<c:url value="/resources/css/pure-0.4.2.css"/>'>
+<link rel="stylesheet" href='<c:url value="/resources/media/css/jquery.dataTables.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/css/font-awesome-4.0.3/css/font-awesome.css"/>'>
 <link rel="stylesheet" href='<c:url value="/resources/css/jquery-ui-1.10.4.custom.css"/>'>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<link rel="stylesheet" href='<c:url value="/resources/css/jquery-ui.css"/>'>
+<script src='<c:url value="/resources/media/js/jquery.js"/>'></script>
+<script src='<c:url value="/resources/js/jquery-ui.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/resources/js/js-for-listBooks.js"/>'></script> 
+<script src='<c:url value="/resources/media/js/jquery.dataTables.js"/>'></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>GreenBean</title> 

@@ -3,13 +3,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<script>
+	$(document).ready(function(){
+	    $('#categoriasID').DataTable();
+	});
+</script>
+
 <h2>Categorias:</h2>
-<table border="1">
+<table id="categoriasID" cellpadding="0" cellspacing="0" border="0"  >
+<thead>
   <tr>
     <th>Nombre</th>
     <th>Categoria Padre</th>
     <th>Acciones</th>
   </tr>
+</thead>
+<tbody>
   <c:forEach items="${categorias}" var="cat">	
 	  <tr>
 	    <td><c:out value="${cat.nombre}"/></td>
@@ -29,5 +38,6 @@
 		<a href="${catURL4}">mostrar</a></td>
 	  </tr>
   </c:forEach>
+</tbody>
 </table>
 <a href="./new.htm" >Nueva Categoria </a>
